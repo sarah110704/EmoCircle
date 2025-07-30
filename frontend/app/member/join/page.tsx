@@ -41,7 +41,7 @@ export default function MemberSession() {
   useEffect(() => {
     const fetchSessionData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/sessions/details_by_code?code=${sessionCode}`);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/details_by_code?code=${sessionCode}`);
         if (!res.ok) {
           throw new Error('Failed to fetch session details');
         }

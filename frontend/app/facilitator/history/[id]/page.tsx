@@ -49,7 +49,7 @@ export default function SessionHistoryDetail() {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/sessions/${id}`)
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${id}`)
         const data = await res.json()
 
         if (data.session) {

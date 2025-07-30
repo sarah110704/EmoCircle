@@ -31,7 +31,7 @@ export default function MemberSession() {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/sessions/${sessionId}`)
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${sessionId}`)
         const data = await res.json()
         if (data.success) {
           setSession(data.session)
@@ -51,7 +51,7 @@ export default function MemberSession() {
     e.preventDefault()
     if (!message.trim()) return
 
-    const res = await fetch("http://localhost:5000/api/messages/", {
+    const res = await fetch("${process.env.REACT_APP_API_URL}/api/messages/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export default function MemberSession() {
     const data = await res.json()
     if (data.success) {
       setMessage("")
-      const refresh = await fetch(`http://localhost:5000/api/sessions/${sessionId}`)
+      const refresh = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${sessionId}`)
       const newData = await refresh.json()
       if (newData.success) {
         setMessages(newData.session.messages)
@@ -77,7 +77,7 @@ export default function MemberSession() {
   const handleReply = async (messageId: number) => {
     if (!replyText.trim()) return
 
-    const res = await fetch(`http://localhost:5000/api/messages/${messageId}/reply`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/messages/${messageId}/reply`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function MemberSession() {
 
     const data = await res.json()
     if (res.ok) {
-      const updated = await fetch(`http://localhost:5000/api/sessions/${sessionId}`)
+      const updated = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${sessionId}`)
       const updatedData = await updated.json()
       if (updatedData.success) {
         setMessages(updatedData.session.messages)

@@ -43,7 +43,7 @@ export default function SessionHistory() {
         const user = JSON.parse(localStorage.getItem("user") || "{}");
         const facilitatorId = user.id;
         const res = await axios.get(
-          `http://localhost:5000/api/sessions/history?facilitator_id=${facilitatorId}`
+          `${process.env.REACT_APP_API_URL}/api/sessions/history?facilitator_id=${facilitatorId}`
         );
 
         if (res.data.success) {

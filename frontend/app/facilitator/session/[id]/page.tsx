@@ -63,7 +63,7 @@ export default function FacilitatorSessionDetail() {
   // Fetch session details, participants, and messages
   const fetchSessionDetail = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/sessions/${id}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${id}`);
       const data = await res.json();
       if (data.success) {
         setSession(data.session);
@@ -79,7 +79,7 @@ export default function FacilitatorSessionDetail() {
 
   const fetchParticipants = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/sessions/${id}/participants`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${id}/participants`);
       const data = await res.json();
       if (data.success) {
         setParticipants(data.participants);
@@ -101,7 +101,7 @@ export default function FacilitatorSessionDetail() {
 
   const handleReply = async (messageId: number) => {
     if (!replyText.trim()) return;
-    const res = await fetch(`http://localhost:5000/api/messages/${messageId}/reply`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/messages/${messageId}/reply`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +120,7 @@ export default function FacilitatorSessionDetail() {
 
   const handleEndSession = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/sessions/${id}/end`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions/${id}/end`, {
         method: "PUT", // Menggunakan PUT untuk mengubah status sesi
         credentials: "include",
       });

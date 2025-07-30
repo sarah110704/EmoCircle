@@ -38,7 +38,7 @@ export default function FacilitatorDashboard() {
       const facilitator_id = userData.id;
 
       const response = await fetch(
-        `http://localhost:5000/api/sessions/?facilitator_id=${facilitator_id}&status=${status}`,
+        `${process.env.REACT_APP_API_URL}/api/sessions?facilitator_id=${facilitator_id}&status=${status}`,
         {
           method: "GET", 
           credentials: "include", // Pastikan untuk menyertakan kredensial
@@ -76,7 +76,7 @@ export default function FacilitatorDashboard() {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
       const facilitator_id = user.id;
 
-      const response = await fetch("http://localhost:5000/api/sessions/", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/sessions`, {
         method: "POST", 
         headers: { "Content-Type": "application/json" },
         credentials: "include", 
